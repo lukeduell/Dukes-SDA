@@ -1,4 +1,4 @@
-#Dukes Sports Data Analytics (NCAA Men's Basketball for right now)
+# Dukes Sports Data Analytics (NCAA Men's Basketball for right now)
 
 # Getting Started with Create React App
 
