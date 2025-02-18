@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AnimatedLayout from './components/AnimatedLayout';
+import TeamList from './components/TeamList';
+import TeamDetails from './components/TeamDetails';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/* The AnimatedLayout is our shared layout that animates route transitions */}
+        <Route element={<AnimatedLayout />}>
+          <Route path="/" element={<TeamList />} />
+          <Route path="/teams/:id" element={<TeamDetails />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
