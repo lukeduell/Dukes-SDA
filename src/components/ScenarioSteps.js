@@ -1,4 +1,5 @@
 // client/src/components/ScenarioSteps.js
+
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import styled from 'styled-components';
@@ -103,17 +104,11 @@ export default function ScenarioSteps({ teamId, teamName, onClose }) {
       });
   }, [teamId]);
 
-  if (loading) {
-    return null;
-  }
-
-  if (!scenario.length) {
-    return null;
-  }
+  if (loading) return null;
+  if (!scenario.length) return null;
 
   const currentStep = scenario[stepIndex];
   const totalSteps = scenario.length;
-
   const progressPercent = currentStep.probability * 100;
 
   return (

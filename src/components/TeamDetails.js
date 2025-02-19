@@ -1,4 +1,5 @@
 // client/src/components/TeamDetails.js
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
@@ -51,6 +52,7 @@ const TeamHeader = styled.div`
     border: 3px solid #ff2e63;
     border-radius: 50%;
     margin-right: 1rem;
+    object-fit: cover;
   }
 
   h2 {
@@ -68,9 +70,11 @@ const StatsBox = styled.div`
   box-shadow: 0 0 10px rgba(255,46,99,0.2);
 `;
 
-const StatItem = styled.p`
+const StatLine = styled.p`
   font-size: 1.2rem;
   margin: 0.5rem 0;
+  letter-spacing: 0.5px;
+  color: #ccc;
 `;
 
 const BigButton = styled.button`
@@ -99,7 +103,7 @@ export default function TeamDetails() {
       .then((res) => res.json())
       .then((allTeams) => {
         const found = allTeams.find((t) => t.id === Number(id));
-        setTeam(found);
+        setTeam(found || null);
         setLoading(false);
       })
       .catch((err) => {
@@ -131,20 +135,31 @@ export default function TeamDetails() {
     );
   }
 
+  const confRecord = `${team.confWins}-${team.confLosses}`;
+  const overallRecord = `${team.overallWins}-${team.overallLosses}`;
+  const logoUrl = `https://via.placeholder.com/120x120?text=${encodeURIComponent(team.name)}`;
+
   return (
     <Container>
       <SwirlBackground />
       <Content>
         <BackButton onClick={() => navigate('/')}>⬅ Back</BackButton>
+
         <TeamHeader>
-          <img src={team.logo} alt={team.name} />
+          <img src={logoUrl} alt={team.name} />
           <h2>{team.name}</h2>
         </TeamHeader>
 
         <StatsBox>
-          <StatItem>Offensive Efficiency: {team.offensiveEfficiency}</StatItem>
-          <StatItem>Defensive Efficiency: {team.defensiveEfficiency}</StatItem>
-          <StatItem>Strength of Schedule: {team.strengthOfSchedule}</StatItem>
+          <StatLine>Rank: {team.rank}</StatLine>
+          <StatLine>Conference Record: {confRecord}</StatLine>
+          <StatLine>Overall Record: {overallRecord}</StatLine>
+          <StatLine>Home: {team.homeRecord}</StatLine>
+          <StatLine>Road: {team.roadRecord}</StatLine>
+          <StatLine>Streak: {team.streak}</StatLine>
+          <StatLine>Offensive Efficiency: {team.offensiveEfficiency}</StatLine>
+          <StatLine>Defensive Efficiency: {team.defensiveEfficiency}</StatLine>
+          <StatLine>Strength of Schedule: {team.strengthOfSchedule}</StatLine>
         </StatsBox>
 
         <BigButton onClick={() => setShowScenario(true)}>

@@ -1,4 +1,5 @@
 // client/src/components/TeamList.js
+
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
@@ -6,7 +7,7 @@ import TeamCard from './TeamCard';
 import HeroBanner from './HeroBanner';
 
 const Container = styled.div`
-  background: #1c1c1c; /* dark background */
+  background: #1c1c1c;
   min-height: 100vh;
   padding: 2rem;
   color: #fff;
